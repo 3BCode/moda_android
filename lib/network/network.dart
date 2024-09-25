@@ -38,11 +38,19 @@ class NetworkURL {
     return '$baseURL/karyawan?page=$page';
   }
 
-  // Tutup Baru API
-
-  static String getProfil(String adminid) {
-    return "$baseURL/profil.php?adminid=$adminid";
+  static String getProfil() {
+    return "$baseURL/user/profile";
   }
+
+  static String editProfil() {
+    return "$baseURL/user/profile/update";
+  }
+
+  static String editProfilPhoto() {
+    return "$baseURL/user/photo/update";
+  }
+
+  // Tutup Baru API
 
   static String profilEditGambar() {
     return "$baseURL/profil_edit_gambar.php";

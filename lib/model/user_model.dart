@@ -1,40 +1,75 @@
 class UserModel {
-  final String? id;
-  final String? nama;
+  final int? id;
+  final int? loketId;
+  final String? name;
   final String? namaLoket;
+  final String? noHp;
+  final String? fileLoket;
   final String? alamat;
-  final String? noHP;
   final String? email;
+  final String? emailVerifiedAt;
+  final String? role;
+  final String? foto;
   final String? level;
-  final String? status;
-  final String? gambar;
-  final String? createdDate;
+  final int? isVerified;
+  final String? createdAt;
+  final String? updatedAt;
 
   UserModel({
     this.id,
-    this.nama,
+    this.loketId,
+    this.name,
     this.namaLoket,
+    this.noHp,
+    this.fileLoket,
     this.alamat,
-    this.noHP,
     this.email,
+    this.emailVerifiedAt,
+    this.role,
+    this.foto,
     this.level,
-    this.status,
-    this.gambar,
-    this.createdDate,
+    this.isVerified,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
-      nama: json['nama'],
-      namaLoket: json['namaLoket'],
+      loketId: json['loket_id'],
+      name: json['name'],
+      namaLoket: json['nama_loket'],
+      noHp: json['no_hp'],
+      fileLoket: json['file_loket'],
       alamat: json['alamat'],
-      noHP: json['noHP'],
       email: json['email'],
+      emailVerifiedAt: json['email_verified_at'],
+      role: json['role'],
+      foto: json['foto'],
       level: json['level'],
-      status: json['status'],
-      gambar: json['gambar'],
-      createdDate: json['createdDate'],
+      isVerified: json['is_verified'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'loket_id': loketId,
+      'name': name,
+      'nama_loket': namaLoket,
+      'no_hp': noHp,
+      'file_loket': fileLoket,
+      'alamat': alamat,
+      'email': email,
+      'email_verified_at': emailVerifiedAt,
+      'role': role,
+      'foto': foto,
+      'level': level,
+      'is_verified': isVerified,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
   }
 }
