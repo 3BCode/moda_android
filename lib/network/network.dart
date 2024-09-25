@@ -34,6 +34,10 @@ class NetworkURL {
     return '$baseURL/paket?page=$page';
   }
 
+  static String getKaryawan(int page) {
+    return '$baseURL/karyawan?page=$page';
+  }
+
   // Tutup Baru API
 
   static String getProfil(String adminid) {
