@@ -42,11 +42,11 @@ class NetworkURL {
     return "$baseURL/user/profile";
   }
 
-  static String editProfil() {
+  static String editProfile() {
     return "$baseURL/user/profile/update";
   }
 
-  static String editProfilPhoto() {
+  static String editProfilePhoto() {
     return "$baseURL/user/photo/update";
   }
 
