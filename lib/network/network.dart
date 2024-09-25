@@ -38,7 +38,7 @@ class NetworkURL {
     return '$baseURL/karyawan?page=$page';
   }
 
-  static String getProfil() {
+  static String getProfile() {
     return "$baseURL/user/profile";
   }
 
