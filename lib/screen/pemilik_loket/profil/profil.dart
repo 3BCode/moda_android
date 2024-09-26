@@ -165,9 +165,7 @@ class _ProfilState extends State<Profil> {
           ElevatedButton.icon(
             icon: const Icon(Icons.edit, size: 18),
             label: Text('Edit Profil', style: GoogleFonts.fredoka()),
-            onPressed: () {
-              // TODO: Implement edit profile functionality
-            },
+            onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColor.backgroundColor,
               foregroundColor: Colors.white,
@@ -223,9 +221,7 @@ class _ProfilState extends State<Profil> {
         ),
       ),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () {
-        // TODO: Implement navigation to respective pages
-      },
+      onTap: () {},
     );
   }
 
