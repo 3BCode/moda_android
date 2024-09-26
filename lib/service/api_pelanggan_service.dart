@@ -38,7 +38,7 @@ class ApiPelangganService {
     final accessToken = prefs['accessToken'];
 
     if (tokenType == null || accessToken == null) {
-      throw Exception('Token is not available');
+      throw Exception('Token tidak tersedia');
     }
 
     final response = await http.post(
@@ -46,14 +46,43 @@ class ApiPelangganService {
       headers: {
         'Authorization': '$tokenType $accessToken',
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
-      body: json.encode(pelanggan.toJson()),
+      body: json.encode({
+        'nm_penumpang': pelanggan.nmPenumpang,
+        'no_hp': pelanggan.noHp,
+      }),
     );
 
+    final responseBody = json.decode(response.body);
+
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return responseBody;
+    } else if (response.statusCode == 422) {
+      // Tangani error validasi
+      if (responseBody.containsKey('errors')) {
+        final errors = responseBody['errors'] as Map<String, dynamic>;
+        final errorMessages = <String>[];
+
+        errors.forEach((key, value) {
+          if (value is List) {
+            errorMessages.addAll(value.cast<String>());
+          } else if (value is String) {
+            errorMessages.add(value);
+          }
+        });
+
+        throw Exception(errorMessages.join('\n'));
+      } else if (responseBody.containsKey('message')) {
+        throw Exception(responseBody['message']);
+      } else {
+        throw Exception('Terjadi kesalahan validasi');
+      }
     } else {
-      throw Exception('Failed to create pelanggan');
+      print('Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+      throw Exception(
+          'Terjadi kesalahan dalam permintaan: ${response.statusCode}');
     }
   }
 }

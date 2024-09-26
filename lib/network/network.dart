@@ -27,15 +27,15 @@ class NetworkURL {
   }
 
   static String pelangganAdd() {
-    return "$baseURL/pelanggan/store";
+    return "$baseURL/penumpang/store";
   }
 
   static String pelangganEdit() {
-    return "$baseURL/pelanggan/update";
+    return "$baseURL/penumpang/update";
   }
 
   static String pelangganDelete() {
-    return "$baseURL/pelanggan/destroy";
+    return "$baseURL/penumpang/destroy";
   }
 
   static String getTiket(int page) {

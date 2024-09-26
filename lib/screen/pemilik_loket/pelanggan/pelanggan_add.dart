@@ -56,7 +56,8 @@ class _PelangganAddState extends State<PelangganAdd> {
         _dismissProcessingDialog();
         widget.reload();
         if (!mounted) return;
-        _showSuccessDialog(response['meta']['message']);
+        _showSuccessDialog(
+            response['meta']['message'] ?? 'Pelanggan berhasil ditambahkan');
       } catch (e) {
         print('Error : $e');
         setState(() {
@@ -64,7 +65,7 @@ class _PelangganAddState extends State<PelangganAdd> {
         });
         _dismissProcessingDialog();
         if (!mounted) return;
-        _showErrorDialog('$e');
+        _showErrorDialog(e.toString().replaceAll('Exception: ', ''));
       }
     }
   }
@@ -269,6 +270,7 @@ class _PelangganAddState extends State<PelangganAdd> {
                             labelText: "Nama",
                             hintText: "Masukkan nama",
                             isRequired: true,
+                            textCapitalization: TextCapitalization.words,
                           ),
                           const SizedBox(height: 16),
                           _buildTextField(
@@ -305,7 +307,7 @@ class _PelangganAddState extends State<PelangganAdd> {
                             ),
                           )
                         : Text(
-                            'Tambah Pelanggan',
+                            'Simpan',
                             style: GoogleFonts.fredoka(
                               fontSize: 16,
                             ),
@@ -327,6 +329,7 @@ class _PelangganAddState extends State<PelangganAdd> {
     bool isRequired = false,
     String? prefix,
     TextInputType keyboardType = TextInputType.text,
+    TextCapitalization textCapitalization = TextCapitalization.none,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -367,6 +370,7 @@ class _PelangganAddState extends State<PelangganAdd> {
             TextFormField(
               controller: controller,
               keyboardType: keyboardType,
+              textCapitalization: textCapitalization,
               style: GoogleFonts.fredoka(color: AppColor.black, fontSize: 16),
               decoration: InputDecoration(
                 hintText: hintText,
