@@ -289,32 +289,40 @@ class _PelangganAddState extends State<PelangganAdd> {
                     ),
                   ),
                   const SizedBox(height: 36),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.buttonColor,
-                      foregroundColor: AppColor.putih,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                  SizedBox(
+                    height: 48, // Atur tinggi tombol secara eksplisit
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.buttonColor,
+                        foregroundColor: AppColor.putih,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              24), // Sesuaikan dengan setengah tinggi tombol
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal:
+                                24), // Kurangi padding vertikal, tambah horizontal jika perlu
+                        elevation: 0,
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      elevation: 0,
+                      onPressed: isLoading ? null : _submitForm,
+                      child: isLoading
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                color: AppColor.putih,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Text(
+                              'SIMPAN',
+                              style: GoogleFonts.fredoka(
+                                fontSize: 20, // Kurangi ukuran font sedikit
+                                fontWeight: FontWeight
+                                    .w500, // Tambahkan weight untuk keterbacaan
+                              ),
+                            ),
                     ),
-                    onPressed: isLoading ? null : _submitForm,
-                    child: isLoading
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              color: AppColor.putih,
-                              strokeWidth: 2,
-                            ),
-                          )
-                        : Text(
-                            'Simpan',
-                            style: GoogleFonts.fredoka(
-                              fontSize: 16,
-                            ),
-                          ),
                   ),
                 ],
               ),
