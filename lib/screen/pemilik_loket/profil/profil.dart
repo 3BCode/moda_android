@@ -97,54 +97,86 @@ class _ProfilState extends State<Profil> {
 
   Widget _buildProfileInfo() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColor.putih,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 1,
-            blurRadius: 1,
-            offset: const Offset(0, 1),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            namaLoket,
-            style: GoogleFonts.fredoka(
-              textStyle: const TextStyle(
-                color: AppColor.black,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+          Row(
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: AppColor.backgroundColor.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColor.backgroundColor, width: 2),
+                ),
+                child: const Icon(Icons.store,
+                    size: 40, color: AppColor.backgroundColor),
               ),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            email,
-            style: GoogleFonts.fredoka(
-              textStyle: const TextStyle(
-                color: AppColor.abu,
-                fontSize: 16,
+              const SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      namaLoket,
+                      style: GoogleFonts.fredoka(
+                        textStyle: const TextStyle(
+                          color: AppColor.black,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        const Icon(Icons.email, size: 16, color: AppColor.abu),
+                        const SizedBox(width: 8),
+                        Text(
+                          email,
+                          style: GoogleFonts.fredoka(
+                            textStyle: const TextStyle(
+                              color: AppColor.abu,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-          const SizedBox(height: 16),
-          ElevatedButton(
+          const SizedBox(height: 20),
+          ElevatedButton.icon(
+            icon: const Icon(Icons.edit, size: 18),
+            label: Text('Edit Profil', style: GoogleFonts.fredoka()),
             onPressed: () {
               // TODO: Implement edit profile functionality
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColor.backgroundColor,
+              foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              elevation: 2,
             ),
-            child: Text('Edit Profil', style: GoogleFonts.fredoka()),
           ),
         ],
       ),
