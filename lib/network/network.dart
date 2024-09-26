@@ -26,6 +26,18 @@ class NetworkURL {
     return '$baseURL/penumpang?page=$page';
   }
 
+  static String pelangganAdd() {
+    return "$baseURL/pelanggan/store";
+  }
+
+  static String pelangganEdit() {
+    return "$baseURL/pelanggan/update";
+  }
+
+  static String pelangganDelete() {
+    return "$baseURL/pelanggan/destroy";
+  }
+
   static String getTiket(int page) {
     return '$baseURL/tiket?page=$page';
   }
@@ -122,18 +134,6 @@ class NetworkURL {
 
   static String pelangganGet(String adminid) {
     return "$baseURL/pelanggan.php?adminid=$adminid";
-  }
-
-  static String pelangganAdd() {
-    return "$baseURL/pelanggan_add.php";
-  }
-
-  static String pelangganEdit() {
-    return "$baseURL/pelanggan_edit.php";
-  }
-
-  static String pelangganDelete() {
-    return "$baseURL/pelanggan_delete.php";
   }
 
   static String tiketGet(String adminid) {
