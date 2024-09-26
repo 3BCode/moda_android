@@ -187,7 +187,6 @@ class _RegistrasiState extends State<Registrasi> {
                       style: GoogleFonts.fredoka(
                         fontSize: 22,
                         color: AppColor.black,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -218,7 +217,6 @@ class _RegistrasiState extends State<Registrasi> {
                         style: GoogleFonts.fredoka(
                           color: AppColor.putih,
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -281,7 +279,6 @@ class _RegistrasiState extends State<Registrasi> {
                       style: GoogleFonts.fredoka(
                         fontSize: 22,
                         color: AppColor.black,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -308,7 +305,6 @@ class _RegistrasiState extends State<Registrasi> {
                         style: GoogleFonts.fredoka(
                           color: AppColor.putih,
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
