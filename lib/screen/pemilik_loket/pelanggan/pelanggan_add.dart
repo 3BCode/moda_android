@@ -44,13 +44,14 @@ class _PelangganAddState extends State<PelangganAdd> {
       });
       _showProcessingDialog();
 
-      final formattedPhoneNumber = formatPhoneNumber(_noHpController.text);
-
-      final newPelanggan = PelangganModel(
-        nmPenumpang: _nmPenumpangController.text,
-        noHp: formattedPhoneNumber,
-      );
       try {
+        final formattedPhoneNumber = formatPhoneNumber(_noHpController.text);
+
+        final newPelanggan = PelangganModel(
+          nmPenumpang: _nmPenumpangController.text,
+          noHp: formattedPhoneNumber,
+        );
+
         final response =
             await ApiPelangganService().createPelanggan(newPelanggan);
         setState(() {
@@ -68,7 +69,9 @@ class _PelangganAddState extends State<PelangganAdd> {
         });
         _dismissProcessingDialog();
         if (!mounted) return;
-        _showErrorDialog(e.toString().replaceAll('Exception: ', ''));
+        _showErrorDialog(e is FormatException
+            ? e.message
+            : e.toString().replaceAll('Exception: ', ''));
       }
     }
   }
@@ -290,18 +293,15 @@ class _PelangganAddState extends State<PelangganAdd> {
                   ),
                   const SizedBox(height: 36),
                   SizedBox(
-                    height: 48, // Atur tinggi tombol secara eksplisit
+                    height: 48,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColor.buttonColor,
                         foregroundColor: AppColor.putih,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              24), // Sesuaikan dengan setengah tinggi tombol
+                          borderRadius: BorderRadius.circular(24),
                         ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal:
-                                24), // Kurangi padding vertikal, tambah horizontal jika perlu
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         elevation: 0,
                       ),
                       onPressed: isLoading ? null : _submitForm,
@@ -317,9 +317,8 @@ class _PelangganAddState extends State<PelangganAdd> {
                           : Text(
                               'SIMPAN',
                               style: GoogleFonts.fredoka(
-                                fontSize: 20, // Kurangi ukuran font sedikit
-                                fontWeight: FontWeight
-                                    .w500, // Tambahkan weight untuk keterbacaan
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                     ),
@@ -334,13 +333,19 @@ class _PelangganAddState extends State<PelangganAdd> {
   }
 
   String formatPhoneNumber(String phone) {
-    if (phone.startsWith('0')) {
-      phone = phone.substring(1);
+    phone = phone.replaceAll(RegExp(r'[^\d]+'), '');
+
+    if (phone.startsWith('62')) {
+      phone = phone.substring(2);
     }
-    if (!phone.startsWith('+62')) {
-      phone = '+62$phone';
+
+    phone = phone.replaceFirst(RegExp(r'^0+'), '');
+
+    if (phone.length < 9 || phone.length > 12) {
+      throw const FormatException('Nomor telepon tidak valid');
     }
-    return phone;
+
+    return '+62$phone';
   }
 
   Widget _buildTextField({
@@ -418,7 +423,13 @@ class _PelangganAddState extends State<PelangganAdd> {
                   return 'Field ini wajib diisi';
                 }
                 if (labelText == "Nomor HP") {
-                  if (value!.length < 10) {
+                  try {
+                    String formattedNumber = formatPhoneNumber(value!);
+                    if (formattedNumber.length < 14 ||
+                        formattedNumber.length > 15) {
+                      return 'Nomor HP tidak valid';
+                    }
+                  } catch (e) {
                     return 'Nomor HP tidak valid';
                   }
                 }
@@ -427,7 +438,7 @@ class _PelangganAddState extends State<PelangganAdd> {
               inputFormatters: labelText == "Nomor HP"
                   ? [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(13),
+                      LengthLimitingTextInputFormatter(14),
                     ]
                   : null,
             ),
