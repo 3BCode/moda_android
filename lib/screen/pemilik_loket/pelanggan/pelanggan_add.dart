@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:moda/components/app_color.dart';
+import 'package:moda/components/show_processing_dialog.dart';
 import 'package:moda/model/pelanggan_model.dart';
 import 'package:moda/service/api_pelanggan_service.dart';
 
@@ -18,12 +20,29 @@ class _PelangganAddState extends State<PelangganAdd> {
   final TextEditingController _noHpController = TextEditingController();
 
   bool isLoading = false;
+  bool _isDialogShowing = false;
+
+  void _showProcessingDialog() {
+    if (!_isDialogShowing) {
+      _isDialogShowing = true;
+      showProcessingDialog(context);
+    }
+  }
+
+  void _dismissProcessingDialog() {
+    if (_isDialogShowing && mounted) {
+      Navigator.of(context).pop();
+      _isDialogShowing = false;
+    }
+  }
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         isLoading = true;
       });
+      _showProcessingDialog();
+
       final newPelanggan = PelangganModel(
         nmPenumpang: _nmPenumpangController.text,
         noHp: _noHpController.text,
@@ -34,6 +53,7 @@ class _PelangganAddState extends State<PelangganAdd> {
         setState(() {
           isLoading = false;
         });
+        _dismissProcessingDialog();
         widget.reload();
         if (!mounted) return;
         _showSuccessDialog(response['meta']['message']);
@@ -42,6 +62,7 @@ class _PelangganAddState extends State<PelangganAdd> {
         setState(() {
           isLoading = false;
         });
+        _dismissProcessingDialog();
         if (!mounted) return;
         _showErrorDialog('$e');
       }
@@ -49,11 +70,144 @@ class _PelangganAddState extends State<PelangganAdd> {
   }
 
   void _showSuccessDialog(String message) {
-    // Existing success dialog implementation
+    showGeneralDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionBuilder: (context, a1, a2, dialogWidget) {
+        return Transform.scale(
+          scale: a1.value,
+          child: Opacity(
+            opacity: a1.value,
+            child: AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              backgroundColor: AppColor.putih,
+              title: Column(
+                children: [
+                  Lottie.asset(
+                    'assets/animations/high_five.json',
+                    width: 150,
+                    height: 150,
+                    fit: BoxFit.contain,
+                    repeat: true,
+                    reverse: true,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Pelanggan Berhasil Ditambahkan",
+                    style: GoogleFonts.fredoka(
+                      fontSize: 15,
+                      color: AppColor.black,
+                    ),
+                  ),
+                ],
+              ),
+              content: Text(
+                message,
+                style: GoogleFonts.fredoka(fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+              actions: [
+                Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.buttonColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      widget.reload();
+                    },
+                    child: Text(
+                      "Selesai",
+                      style: GoogleFonts.fredoka(
+                        color: AppColor.putih,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 300),
+      barrierDismissible: false,
+      barrierLabel: '',
+      pageBuilder: (context, animation1, animation2) => const SizedBox(),
+    );
   }
 
   void _showErrorDialog(String message) {
-    // Existing error dialog implementation
+    showGeneralDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionBuilder: (context, a1, a2, widget) {
+        return Transform.scale(
+          scale: a1.value,
+          child: Opacity(
+            opacity: a1.value,
+            child: AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              backgroundColor: AppColor.putih,
+              title: Column(
+                children: [
+                  const Icon(Icons.error_outline, color: Colors.red, size: 50),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Gagal Menambahkan Pelanggan",
+                    style: GoogleFonts.fredoka(
+                      fontSize: 15,
+                      color: AppColor.black,
+                    ),
+                  ),
+                ],
+              ),
+              content: Text(
+                message,
+                style: GoogleFonts.fredoka(fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+              actions: [
+                Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(
+                      "Coba Lagi",
+                      style: GoogleFonts.fredoka(
+                        color: AppColor.putih,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 200),
+      barrierDismissible: false,
+      barrierLabel: '',
+      pageBuilder: (context, animation1, animation2) => const SizedBox(),
+    );
   }
 
   @override
