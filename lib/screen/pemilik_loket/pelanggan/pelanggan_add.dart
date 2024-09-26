@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:moda/components/app_color.dart';
@@ -43,9 +44,11 @@ class _PelangganAddState extends State<PelangganAdd> {
       });
       _showProcessingDialog();
 
+      final formattedPhoneNumber = formatPhoneNumber(_noHpController.text);
+
       final newPelanggan = PelangganModel(
         nmPenumpang: _nmPenumpangController.text,
-        noHp: _noHpController.text,
+        noHp: formattedPhoneNumber,
       );
       try {
         final response =
@@ -322,6 +325,16 @@ class _PelangganAddState extends State<PelangganAdd> {
     );
   }
 
+  String formatPhoneNumber(String phone) {
+    if (phone.startsWith('0')) {
+      phone = phone.substring(1);
+    }
+    if (!phone.startsWith('+62')) {
+      phone = '+62$phone';
+    }
+    return phone;
+  }
+
   Widget _buildTextField({
     required TextEditingController controller,
     required String labelText,
@@ -396,8 +409,19 @@ class _PelangganAddState extends State<PelangganAdd> {
                 if (isRequired && (value == null || value.isEmpty)) {
                   return 'Field ini wajib diisi';
                 }
+                if (labelText == "Nomor HP") {
+                  if (value!.length < 10) {
+                    return 'Nomor HP tidak valid';
+                  }
+                }
                 return null;
               },
+              inputFormatters: labelText == "Nomor HP"
+                  ? [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(13),
+                    ]
+                  : null,
             ),
           ],
         ),
