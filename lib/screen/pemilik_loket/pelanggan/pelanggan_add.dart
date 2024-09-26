@@ -102,7 +102,7 @@ class _PelangganAddState extends State<PelangganAdd> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "Pelanggan Berhasil Ditambahkan",
+                    "Berhasil Ditambahkan",
                     style: GoogleFonts.fredoka(
                       fontSize: 15,
                       color: AppColor.black,
