@@ -1,9 +1,6 @@
 class NetworkURL {
-  // https://testing.moda.my.id
-  // static String baseURL = "http://192.168.1.7/moda/public/api";
-  // static String storageURL = 'http://192.168.1.7/moda/public/storage/';
-  static String baseURL = "https://testing.moda.my.id/api";
-  static String storageURL = 'https://testing.moda.my.id/storage/';
+  static String baseURL = "http://192.168.1.5/moda/public/api";
+  static String storageURL = 'http://192.168.1.5/moda/public/storage/';
   // Baru API
   static String login() {
     return '$baseURL/login';
