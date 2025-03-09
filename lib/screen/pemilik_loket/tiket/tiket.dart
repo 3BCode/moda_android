@@ -204,21 +204,21 @@ class _TiketState extends State<Tiket> {
               Text(
                 'Berangkat ${tiket.tglBerangkat}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
               Text(
                 'Pelanggan ${tiket.nmPenumpang}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
               Text(
                 'No HP ${tiket.noHp}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),

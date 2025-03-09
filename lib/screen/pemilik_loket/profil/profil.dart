@@ -103,7 +103,7 @@ class _ProfilState extends State<Profil> {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(),
             spreadRadius: 1,
             blurRadius: 10,
             offset: const Offset(0, 3),
@@ -118,7 +118,7 @@ class _ProfilState extends State<Profil> {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: AppColor.backgroundColor.withOpacity(0.1),
+                  color: AppColor.backgroundColor.withValues(),
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColor.backgroundColor, width: 2),
                 ),
@@ -196,7 +196,7 @@ class _ProfilState extends State<Profil> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 2),

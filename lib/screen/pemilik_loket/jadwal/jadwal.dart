@@ -244,21 +244,21 @@ class _JadwalState extends State<Jadwal> {
               Text(
                 'Rp ${price.format(double.parse(jadwal.harga!))}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
               Text(
                 '${jadwal.sopirNama} - ${jadwal.angkutanPlat}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
               Text(
                 '${jadwal.kabAsal} To ${jadwal.kabTujuan}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 12,
                 ),
               ),

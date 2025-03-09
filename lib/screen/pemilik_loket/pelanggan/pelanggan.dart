@@ -242,7 +242,7 @@ class _PelangganState extends State<Pelanggan> {
               Text(
                 '${pelanggan.noHp}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),

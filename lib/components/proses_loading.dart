@@ -15,11 +15,11 @@ class ProsesLoading extends StatelessWidget {
           minWidth: 200,
         ),
         decoration: BoxDecoration(
-          color: AppColor.putih.withOpacity(0.8),
+          color: AppColor.putih.withValues(),
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: AppColor.abus.withOpacity(0.2),
+              color: AppColor.abus.withValues(),
               spreadRadius: 1,
               blurRadius: 5,
               offset: const Offset(0, 3),

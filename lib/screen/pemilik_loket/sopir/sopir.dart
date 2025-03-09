@@ -241,14 +241,14 @@ class _SopirState extends State<Sopir> {
               Text(
                 'Plat: ${sopir.angkutanPlat}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
               Text(
                 'Sopir: ${sopir.nama}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),

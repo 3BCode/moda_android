@@ -79,7 +79,7 @@ class _PelangganAddState extends State<PelangganAdd> {
   void _showSuccessDialog(String message) {
     showGeneralDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(),
       transitionBuilder: (context, a1, a2, dialogWidget) {
         return Transform.scale(
           scale: a1.value,
@@ -155,7 +155,7 @@ class _PelangganAddState extends State<PelangganAdd> {
   void _showErrorDialog(String message) {
     showGeneralDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(),
       transitionBuilder: (context, a1, a2, widget) {
         return Transform.scale(
           scale: a1.value,
@@ -260,7 +260,7 @@ class _PelangganAddState extends State<PelangganAdd> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
+                          color: Colors.grey.withValues(),
                           spreadRadius: 1,
                           blurRadius: 3,
                           offset: const Offset(0, 1),

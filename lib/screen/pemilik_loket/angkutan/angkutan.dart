@@ -242,14 +242,14 @@ class _AngkutanState extends State<Angkutan> {
               Text(
                 'Plat: ${angkutan.plat}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
               Text(
                 'Kapasitas: ${angkutan.kapasitas}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),

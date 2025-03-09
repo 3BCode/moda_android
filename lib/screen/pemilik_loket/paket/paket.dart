@@ -204,14 +204,14 @@ class _PaketState extends State<Paket> {
               Text(
                 'Penerima ${paket.nmPenerima}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
               Text(
                 'Hp Penerima ${paket.noHpPenerima}',
                 style: GoogleFonts.fredoka(
-                  color: AppColor.black.withOpacity(0.7),
+                  color: AppColor.black.withValues(),
                   fontSize: 14,
                 ),
               ),
